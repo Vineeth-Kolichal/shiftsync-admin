@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:iconsax/iconsax.dart';
-import 'package:shiftsync_admin/application/cubit/custom_bottom_navigation/custom_bottm_navigation_cubit.dart';
+import 'package:shiftsync_admin/bussiness_logic/cubit/custom_bottom_navigation/custom_bottm_navigation_cubit.dart';
 import 'package:shiftsync_admin/core/colors/background_colors.dart';
 import 'package:shiftsync_admin/core/colors/common_colors.dart';
 

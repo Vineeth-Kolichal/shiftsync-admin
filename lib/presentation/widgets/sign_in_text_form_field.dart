@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shiftsync_admin/core/colors/background_colors.dart';
 import 'package:shiftsync_admin/core/colors/common_colors.dart';
-import 'package:shiftsync_admin/domain/core/debouncer/debouncer.dart';
+import 'package:shiftsync_admin/core/constants/debouncer/debouncer.dart';
 
 // ignore: must_be_immutable
 class SignInTextFormField extends StatelessWidget {
