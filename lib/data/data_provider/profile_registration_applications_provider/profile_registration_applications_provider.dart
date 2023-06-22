@@ -1,8 +1,10 @@
+import 'dart:developer';
+
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:dio_cookie_manager/dio_cookie_manager.dart';
-import 'package:shiftsync_admin/core/constants/api_endpoints/api_endpoints.dart';
-import 'package:shiftsync_admin/core/constants/api_endpoints/persistent_cookiejar.dart';
+import 'package:shiftsync_admin/util/constants/api_endpoints/api_endpoints.dart';
+import 'package:shiftsync_admin/util/constants/api_endpoints/persistent_cookiejar.dart';
 
 class ProfileRegistrationsApplicationsProvider {
   Dio dio = Dio(BaseOptions(baseUrl: ApiEndpoints.baseUrl));
@@ -13,7 +15,7 @@ class ProfileRegistrationsApplicationsProvider {
       if (response.statusCode == 200) {
         return Right(response);
       } else {
-        return left('Something Error');
+        return left(response.statusCode.toString());
       }
     } on DioException catch (e) {
       if (e.response?.statusCode == 401) {

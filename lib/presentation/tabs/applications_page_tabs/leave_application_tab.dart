@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:shiftsync_admin/core/constants/constants_items/constant_items.dart';
+import 'package:shiftsync_admin/util/constants/constants_items/constant_items.dart';
 
 class LeaveApplicationTab extends StatelessWidget {
   const LeaveApplicationTab({super.key});

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:shiftsync_admin/core/colors/background_colors.dart';
-import 'package:shiftsync_admin/core/constants/api_endpoints/persistent_cookiejar.dart';
+import 'package:shiftsync_admin/util/colors/background_colors.dart';
+import 'package:shiftsync_admin/util/constants/api_endpoints/persistent_cookiejar.dart';
 
 void logout(BuildContext context) {
   showDialog(

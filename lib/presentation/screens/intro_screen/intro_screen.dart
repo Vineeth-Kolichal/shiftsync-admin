@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:shiftsync_admin/core/colors/common_colors.dart';
-import 'package:shiftsync_admin/core/constants/constants_items/constant_items.dart';
-import 'package:shiftsync_admin/core/constants/shared_preferences_key_names/shared_preferences_key_names.dart';
+import 'package:shiftsync_admin/util/colors/common_colors.dart';
+import 'package:shiftsync_admin/util/constants/constants_items/constant_items.dart';
+import 'package:shiftsync_admin/util/constants/shared_preferences_key_names/shared_preferences_key_names.dart';
 import 'package:shiftsync_admin/presentation/widgets/background_stack.dart';
 import 'package:shiftsync_admin/presentation/widgets/submit_button.dart';
 

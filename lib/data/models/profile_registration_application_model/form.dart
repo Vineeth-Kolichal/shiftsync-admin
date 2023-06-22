@@ -3,79 +3,79 @@ import 'package:json_annotation/json_annotation.dart';
 part 'form.g.dart';
 
 @JsonSerializable()
-class Form {
+class Forms {
   @JsonKey(name: 'id')
-  int? id;
+  final int id;
 
   @JsonKey(name: 'firstname')
-  String? firstname;
+  final String firstname;
 
   @JsonKey(name: 'lastname')
-  String? lastname;
+  final String lastname;
 
   @JsonKey(name: 'email')
-  String? email;
-  
+  final String email;
+
   @JsonKey(name: 'gender')
-  String? gender;
+  final String gender;
 
   @JsonKey(name: 'maritalstatus')
-  String? maritalstatus;
+  final String maritalstatus;
 
   @JsonKey(name: 'phone')
-  int? phone;
+  final int phone;
 
   @JsonKey(name: 'dateofbirth')
-  String? dateofbirth;
+  final String dateofbirth;
 
   @JsonKey(name: 'paddress')
-  String? paddress;
+  final String paddress;
 
   @JsonKey(name: 'caddress')
-  String? caddress;
+  final String caddress;
 
   @JsonKey(name: 'accno')
-  String? accno;
+  final String accno;
 
   @JsonKey(name: 'ifsccode')
-  String? ifsccode;
+  final String ifsccode;
 
   @JsonKey(name: 'nameaspass')
-  String? nameaspass;
+  final String nameaspass;
 
   @JsonKey(name: 'pannumber')
-  String? pannumber;
+  final String pannumber;
 
   @JsonKey(name: 'designation')
-  String? designation;
+  final String designation;
 
   @JsonKey(name: 'adhaarnumber')
-  String? adhaarnumber;
+  final String adhaarnumber;
 
   @JsonKey(name: 'photo')
-  String? photo;
+  final String photo;
 
-  Form({
-    this.id,
-    this.firstname,
-    this.lastname,
-    this.email,
-    this.gender,
-    this.maritalstatus,
-    this.phone,
-    this.dateofbirth,
-    this.paddress,
-    this.caddress,
-    this.accno,
-    this.ifsccode,
-    this.nameaspass,
-    this.pannumber,
-    this.designation,
-    this.adhaarnumber,
-    this.photo,
+  Forms({
+    required this.id,
+    required this.firstname,
+    required this.lastname,
+    required this.email,
+    required this.gender,
+    required this.maritalstatus,
+    required this.phone,
+    required this.dateofbirth,
+    required this.paddress,
+    required this.caddress,
+    required this.accno,
+    required this.ifsccode,
+    required this.nameaspass,
+    required this.pannumber,
+    required this.designation,
+    required this.adhaarnumber,
+    required this.photo,
   });
 
-  factory Form.fromJson(Map<String, dynamic> json) => _$FormFromJson(json);
+  factory Forms.fromJson(Map<String, dynamic> json) => _$FormsFromJson(json);
 
-  Map<String, dynamic> toJson() => _$FormToJson(this);
+  Map<String, dynamic> toJson() => _$FormsToJson(this);
 }

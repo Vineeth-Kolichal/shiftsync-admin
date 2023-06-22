@@ -2,13 +2,13 @@ import 'dart:developer';
 
 import 'package:dio/dio.dart';
 import 'package:dio_cookie_manager/dio_cookie_manager.dart';
-import 'package:shiftsync_admin/core/constants/api_endpoints/api_endpoints.dart';
-import 'package:shiftsync_admin/core/constants/api_endpoints/persistent_cookiejar.dart';
+import 'package:shiftsync_admin/util/constants/api_endpoints/api_endpoints.dart';
+import 'package:shiftsync_admin/util/constants/api_endpoints/persistent_cookiejar.dart';
 import 'package:shiftsync_admin/data/models/admin_sign_in_model/admin_sign_in_model.dart';
 import 'package:shiftsync_admin/data/models/admin_sign_in_response_model/admin_sign_in_response_model.dart';
 
 class AdminSignInProvider {
-  Dio dio = Dio(BaseOptions(baseUrl:ApiEndpoints.baseUrl));
+  Dio dio = Dio(BaseOptions(baseUrl: ApiEndpoints.baseUrl));
 
   Future<AdminSignInResponseModel> adminSignIn(
       {required AdminSignInModel adminSignInModel}) async {

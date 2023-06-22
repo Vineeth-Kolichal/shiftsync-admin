@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:shiftsync_admin/core/colors/common_colors.dart';
-import 'package:shiftsync_admin/core/constants/constants_items/constant_items.dart';
+import 'package:shiftsync_admin/util/colors/common_colors.dart';
+import 'package:shiftsync_admin/util/constants/constants_items/constant_items.dart';
 import 'package:shiftsync_admin/presentation/screens/profile_application_view_screen/widgets/content_text.dart';
 import 'package:shiftsync_admin/presentation/widgets/bold_title_text.dart';
 import 'package:shiftsync_admin/presentation/widgets/title_text.dart';

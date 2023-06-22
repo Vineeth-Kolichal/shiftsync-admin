@@ -7,7 +7,7 @@ part 'profile_registration_application_model.g.dart';
 @JsonSerializable()
 class ProfileRegistrationApplicationModel {
   @JsonKey(name: 'forms')
-  List<Form>? forms;
+  List<Forms>? forms;
 
   @JsonKey(name: 'status')
   int? status;
@@ -15,7 +15,7 @@ class ProfileRegistrationApplicationModel {
   @JsonKey(name: 'msg')
   String? msg;
 
-  ProfileRegistrationApplicationModel({this.forms, this.status,this.msg});
+  ProfileRegistrationApplicationModel({this.forms, this.status, this.msg});
 
   factory ProfileRegistrationApplicationModel.fromJson(
       Map<String, dynamic> json) {

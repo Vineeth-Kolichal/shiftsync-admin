@@ -1,8 +1,10 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:shiftsync_admin/core/constants/api_endpoints/api_endpoints.dart';
-import 'package:shiftsync_admin/core/constants/api_endpoints/persistent_cookiejar.dart';
-import 'package:shiftsync_admin/core/constants/shared_preferences_key_names/shared_preferences_key_names.dart';
+import 'package:shiftsync_admin/util/constants/api_endpoints/api_endpoints.dart';
+import 'package:shiftsync_admin/util/constants/api_endpoints/persistent_cookiejar.dart';
+import 'package:shiftsync_admin/util/constants/shared_preferences_key_names/shared_preferences_key_names.dart';
 
 class SplashScreen extends StatelessWidget {
   const SplashScreen({super.key});
@@ -13,6 +15,7 @@ class SplashScreen extends StatelessWidget {
       //getting cookie list from cookie jar
       final cookies = await cookieJar.loadForRequest(
           Uri.parse('${ApiEndpoints.baseUrl}${ApiEndpoints.signInPoint}'));
+      log(cookies.toString());
 
       final shared = await SharedPreferences.getInstance();
       final isNewUser = shared.getBool(newUser);

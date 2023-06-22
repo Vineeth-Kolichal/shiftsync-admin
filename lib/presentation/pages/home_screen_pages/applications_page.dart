@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
-import 'package:shiftsync_admin/core/colors/background_colors.dart';
-import 'package:shiftsync_admin/core/colors/common_colors.dart';
+import 'package:shiftsync_admin/util/colors/background_colors.dart';
+import 'package:shiftsync_admin/util/colors/common_colors.dart';
 import 'package:shiftsync_admin/presentation/screens/home_screen/widgets/logout_dialoge.dart';
 import 'package:shiftsync_admin/presentation/tabs/applications_page_tabs/leave_application_tab.dart';
 import 'package:shiftsync_admin/presentation/tabs/applications_page_tabs/profile_applications_tab.dart';

@@ -10,7 +10,7 @@ class SubmitButton extends StatelessWidget {
       this.borderRadius = 10});
 
   final String label;
-  final Function() onPressed;
+  final Function()? onPressed;
   final double width;
   final Color? buttonColor;
   final double borderRadius;

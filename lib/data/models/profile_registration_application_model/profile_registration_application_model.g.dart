@@ -10,7 +10,7 @@ ProfileRegistrationApplicationModel
     _$ProfileRegistrationApplicationModelFromJson(Map<String, dynamic> json) =>
         ProfileRegistrationApplicationModel(
           forms: (json['forms'] as List<dynamic>?)
-              ?.map((e) => Form.fromJson(e as Map<String, dynamic>))
+              ?.map((e) => Forms.fromJson(e as Map<String, dynamic>))
               .toList(),
           status: json['status'] as int?,
           msg: json['msg'] as String?,

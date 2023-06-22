@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:shiftsync_admin/core/colors/background_colors.dart';
-import 'package:shiftsync_admin/core/constants/constants_items/constant_items.dart';
+import 'package:shiftsync_admin/util/colors/background_colors.dart';
+import 'package:shiftsync_admin/util/constants/constants_items/constant_items.dart';
 
 class CustomAppBar extends StatelessWidget {
   const CustomAppBar(
@@ -47,7 +47,10 @@ class CustomAppBar extends StatelessWidget {
               ],
             ),
           ),
-          bottom ?? const SizedBox()
+          Padding(
+            padding: const EdgeInsets.only(left: 5, right: 5),
+            child: bottom ?? const SizedBox(),
+          )
         ],
       ),
     );
