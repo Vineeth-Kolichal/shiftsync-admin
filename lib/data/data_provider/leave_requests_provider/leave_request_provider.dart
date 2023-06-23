@@ -4,25 +4,25 @@ import 'package:dio_cookie_manager/dio_cookie_manager.dart';
 import 'package:shiftsync_admin/util/constants/api_endpoints/api_endpoints.dart';
 import 'package:shiftsync_admin/util/constants/api_endpoints/persistent_cookiejar.dart';
 
-class ProfileRegistrationsApplicationsProvider {
+class LeaveRequestsProvider {
   Dio dio = Dio(BaseOptions(baseUrl: ApiEndpoints.baseUrl));
-  Future<Either<String, Response<dynamic>>> getProfileApplications() async {
+  Future<Either<String, Response>> getLeaveRequestFromApi() async {
     dio.interceptors.add(CookieManager(cookieJar));
     try {
-      final response = await dio.get(ApiEndpoints.applicationEndPoint);
+      final response = await dio.get(ApiEndpoints.leaveRequestsPoint);
       if (response.statusCode == 200) {
         return Right(response);
       } else {
-        return left(response.statusCode.toString());
+        return const Left('Error occured');
       }
     } on DioException catch (e) {
-      if (e.response?.statusCode == 401) {
+      if (e.response?.statusCode == 400) {
         return Right(e.response!);
       } else {
-        return const Left('Something Error');
+        return const Left('Error occured');
       }
     } catch (e) {
-      return const Left('Something error');
+      return const Left('Error occured');
     }
   }
 }

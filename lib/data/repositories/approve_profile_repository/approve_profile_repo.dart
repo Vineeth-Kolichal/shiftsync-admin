@@ -20,12 +20,12 @@ class ApproveProfileRepo {
       // } else if (resp.status == 201) {
       //   return resp.message ?? 'Successfully Account Created';
       // } else if (resp.status == 400) {
-      //   String allErrorMsg = '';
-      //   List<String> errors = [];
-      //   errors.addAll(resp.errors ?? ['']);
-      //   for (var i = 0; i < errors.length; i++) {
-      //     allErrorMsg = '$allErrorMsg ,${errors[i]}';
-      //   }
+      // String allErrorMsg = '';
+      // List<String> errors = [];
+      // errors.addAll(resp.errors ?? ['']);
+      // for (var i = 0; i < errors.length; i++) {
+      //   allErrorMsg = '$allErrorMsg ,${errors[i]}';
+      // }
       //   return allErrorMsg;
       // } else {
       //   return resp.status.toString();

@@ -54,7 +54,7 @@ class BankDetailsSection extends StatelessWidget {
           children: [
             const TitileText(title: 'Name as per Passbook: '),
             SizedBox(
-              width: size.width * 0.55,
+              // width: size.width * 0.55,
               child: ContentText(
                 content: namePassbook,
               ),

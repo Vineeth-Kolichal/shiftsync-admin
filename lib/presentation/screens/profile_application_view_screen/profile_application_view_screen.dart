@@ -14,7 +14,6 @@ import 'package:shiftsync_admin/presentation/screens/profile_application_view_sc
 import 'package:shiftsync_admin/presentation/widgets/bold_title_text.dart';
 import 'package:shiftsync_admin/presentation/widgets/custom_appbar/custom_app_bar.dart';
 import 'package:shiftsync_admin/presentation/widgets/submit_button.dart';
-
 import 'widgets/personal_details_section.dart';
 
 class ProfileApplicationViewScreen extends StatelessWidget {
@@ -28,18 +27,24 @@ class ProfileApplicationViewScreen extends StatelessWidget {
       listener: (context, state) {
         if (state is ApproveResponseState) {
           log('${state.applicationResponse.errors} --------------${state.applicationResponse.status}');
+          String allErrorMsg = '';
+          List<String> errors = [];
+          errors.addAll(state.applicationResponse.errors ?? ['']);
+          for (var i = 0; i < errors.length; i++) {
+            allErrorMsg = '$allErrorMsg \n ${i + 1}.${errors[i]}';
+          }
           showDialog(
               context: context,
               builder: (ctx) {
                 return AlertDialog(
                   title: Text('Correction!'),
-                  content: Text('Some corrections needed'),
+                  content: Text(allErrorMsg),
                   actions: [
                     ElevatedButton(
                         onPressed: () {
                           Navigator.of(context).pop();
                         },
-                        child: Text('close'))
+                        child: Text('close')),
                   ],
                 );
               });

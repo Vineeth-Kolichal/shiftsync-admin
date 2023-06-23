@@ -1,6 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
 
-
 part 'approve_profile_application_response.g.dart';
 
 @JsonSerializable()
@@ -9,12 +8,10 @@ class ApproveProfileApplicationResponse {
   String? message;
   List<String>? errors;
 
-
   ApproveProfileApplicationResponse({
     this.status,
     this.message,
     this.errors,
- 
   });
 
   factory ApproveProfileApplicationResponse.fromJson(

@@ -1,4 +1,3 @@
-
 import 'package:shiftsync_admin/data/data_provider/profile_registration_applications_provider/profile_registration_applications_provider.dart';
 import 'package:shiftsync_admin/data/models/profile_registration_application_model/profile_registration_application_model.dart';
 

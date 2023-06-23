@@ -3,4 +3,5 @@ class ApiEndpoints {
   static String signInPoint = '/signin/';
   static String applicationEndPoint = '/application/';
   static String approveApplicationPoint = '/application/approve';
+  static String leaveRequestsPoint = '/leave/request';
 }

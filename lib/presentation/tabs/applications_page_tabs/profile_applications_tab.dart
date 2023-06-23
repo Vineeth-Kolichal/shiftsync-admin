@@ -22,7 +22,6 @@ class ProfileApplicationsTab extends StatelessWidget {
       padding: const EdgeInsets.all(10.0),
       child: BlocBuilder<ProfileRegFormBloc, ProfileRegFormState>(
         builder: (context, state) {
-          
           if (state is ProfileRegFormResponseState &&
               state.profileRegistrationApplicationModel.msg == null) {
             if (state.profileRegistrationApplicationModel.status == 204) {
@@ -48,7 +47,7 @@ class ProfileApplicationsTab extends StatelessWidget {
                   child: ListTile(
                     title: Text(
                         '${forms[index].firstname} ${forms[index].lastname}'),
-                    subtitle: Text('ID: $index'),
+                    subtitle: Text('ID: ${forms[index].id}'),
                     trailing: IconButton(
                         onPressed: () {
                           Navigator.of(context).push(MaterialPageRoute(
