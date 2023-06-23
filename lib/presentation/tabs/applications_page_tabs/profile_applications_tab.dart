@@ -1,14 +1,12 @@
-import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:iconsax/iconsax.dart';
 import 'package:shiftsync_admin/bussiness_logic/bloc/profile_reg_form/profile_reg_form_bloc.dart';
-import 'package:shiftsync_admin/util/colors/common_colors.dart';
 import 'package:shiftsync_admin/util/constants/constants_items/constant_items.dart';
 import 'package:shiftsync_admin/data/models/profile_registration_application_model/form.dart';
-import 'package:shiftsync_admin/presentation/screens/profile_application_view_screen/profile_application_view_screen.dart';
 import 'package:shiftsync_admin/presentation/widgets/loading_shimmer.dart';
+
+import 'widgets/profile_application_list_tile.dart';
 
 class ProfileApplicationsTab extends StatelessWidget {
   const ProfileApplicationsTab({super.key});
@@ -40,23 +38,9 @@ class ProfileApplicationsTab extends StatelessWidget {
                     child: Text('No new applications found'),
                   );
                 }
-                return Container(
-                  decoration: BoxDecoration(
-                      color: kWhitebackground,
-                      borderRadius: BorderRadius.circular(10)),
-                  child: ListTile(
-                    title: Text(
-                        '${forms[index].firstname} ${forms[index].lastname}'),
-                    subtitle: Text('ID: ${forms[index].id}'),
-                    trailing: IconButton(
-                        onPressed: () {
-                          Navigator.of(context).push(MaterialPageRoute(
-                              builder: (((context) =>
-                                  ProfileApplicationViewScreen(
-                                      forms: forms[index])))));
-                        },
-                        icon: const Icon(Iconsax.eye)),
-                  ),
+                return ProfileApplicationListTile(
+                  forms: forms,
+                  index: index,
                 );
               },
               separatorBuilder: (ctx, index) {
