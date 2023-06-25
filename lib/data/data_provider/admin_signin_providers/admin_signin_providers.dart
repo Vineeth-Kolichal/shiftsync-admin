@@ -2,18 +2,21 @@ import 'dart:developer';
 
 import 'package:dio/dio.dart';
 import 'package:dio_cookie_manager/dio_cookie_manager.dart';
+import 'package:get_it/get_it.dart';
 import 'package:shiftsync_admin/util/constants/api_endpoints/api_endpoints.dart';
 import 'package:shiftsync_admin/util/constants/api_endpoints/persistent_cookiejar.dart';
 import 'package:shiftsync_admin/data/models/admin_sign_in_model/admin_sign_in_model.dart';
 import 'package:shiftsync_admin/data/models/admin_sign_in_response_model/admin_sign_in_response_model.dart';
+import 'package:shiftsync_admin/util/dio_object/dio_object.dart';
 
 class AdminSignInProvider {
-  Dio dio = Dio(BaseOptions(baseUrl: ApiEndpoints.baseUrl));
+  // Dio dio = Dio(BaseOptions(baseUrl: ApiEndpoints.baseUrl));
 
   Future<AdminSignInResponseModel> adminSignIn(
       {required AdminSignInModel adminSignInModel}) async {
     try {
-      dio.interceptors.add(CookieManager(cookieJar));
+      // dio.interceptors.add(CookieManager(cookieJar));
+      Dio dio = GetIt.instance<DioObject>().returnDioObject();
       final response = await dio.post(ApiEndpoints.signInPoint, data: {
         "username": adminSignInModel.username,
         "password": adminSignInModel.password

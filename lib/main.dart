@@ -11,6 +11,7 @@ import 'package:shiftsync_admin/bussiness_logic/bloc/profile_reg_form/profile_re
 import 'package:shiftsync_admin/bussiness_logic/cubit/custom_bottom_navigation/custom_bottm_navigation_cubit.dart';
 import 'package:shiftsync_admin/bussiness_logic/cubit/internet_connection_check/internet_connection_check_cubit.dart';
 import 'package:shiftsync_admin/util/colors/background_colors.dart';
+import 'package:shiftsync_admin/util/dependancy_injection/dependancy_injection.dart';
 
 import 'presentation/routes/app_routes.dart';
 
@@ -18,6 +19,7 @@ late Directory tempDir;
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   tempDir = await getTemporaryDirectory();
+  await configureInjection();
   runApp(ShiftSyncAdminApp(
     connectivity: Connectivity(),
     appRoutes: AppRoutes(),

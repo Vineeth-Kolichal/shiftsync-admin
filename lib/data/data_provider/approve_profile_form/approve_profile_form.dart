@@ -3,15 +3,18 @@ import 'dart:developer';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:dio_cookie_manager/dio_cookie_manager.dart';
+import 'package:get_it/get_it.dart';
 import 'package:shiftsync_admin/util/constants/api_endpoints/api_endpoints.dart';
 import 'package:shiftsync_admin/util/constants/api_endpoints/persistent_cookiejar.dart';
 import 'package:shiftsync_admin/data/models/approve_application_model/approve_application.dart';
+import 'package:shiftsync_admin/util/dio_object/dio_object.dart';
 
 class ApproveProfileFormApi {
-  Dio dio = Dio(BaseOptions(baseUrl: ApiEndpoints.baseUrl));
+ // Dio dio = Dio(BaseOptions(baseUrl: ApiEndpoints.baseUrl));
   Future<Either<String, Response>> approveProfile(
       {required ApproveApplicationModel approveApplication}) async {
-    dio.interceptors.add(CookieManager(cookieJar));
+   // dio.interceptors.add(CookieManager(cookieJar));
+     Dio dio = GetIt.instance<DioObject>().returnDioObject();
     try {
       final response = await dio.post(ApiEndpoints.approveApplicationPoint,
           data: {"id": approveApplication.id});
