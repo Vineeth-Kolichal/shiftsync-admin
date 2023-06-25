@@ -9,6 +9,7 @@ class LeaveRequestBloc extends Bloc<LeaveRequestEvent, LeaveRequestState> {
   LeaveRequestRepo leaveRequestRepo = LeaveRequestRepo();
   LeaveRequestBloc() : super(LeaveRequestInitial()) {
     on<LeaveRequestEvent>((event, emit) async {
+      emit(LeaveRequestInitial());
       final LeaveRequestsModel leaveRequestsModel =
           await leaveRequestRepo.getAllLeaveRequests();
 

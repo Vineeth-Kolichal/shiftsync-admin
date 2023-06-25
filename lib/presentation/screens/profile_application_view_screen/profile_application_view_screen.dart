@@ -37,14 +37,14 @@ class ProfileApplicationViewScreen extends StatelessWidget {
               context: context,
               builder: (ctx) {
                 return AlertDialog(
-                  title: Text('Correction!'),
+                  title: const Text('Correction!'),
                   content: Text(allErrorMsg),
                   actions: [
                     ElevatedButton(
                         onPressed: () {
                           Navigator.of(context).pop();
                         },
-                        child: Text('close')),
+                        child: const Text('close')),
                   ],
                 );
               });
