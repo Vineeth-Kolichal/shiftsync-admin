@@ -14,3 +14,14 @@ class LeaveRequestResponseState extends LeaveRequestState {
   LeaveRequestResponseState(
       {required this.leaveRequestsModel, required super.isLoading});
 }
+
+class LeaveApproveRespState extends LeaveRequestState {
+  final LeaveApproveRejectRespModel leaveApproveRespModel;
+  LeaveApproveRespState(
+      {required this.leaveApproveRespModel, required super.isLoading});
+}
+class LeaveRejectRespState extends LeaveRequestState {
+  final LeaveApproveRejectRespModel leaveApproveRespModel;
+  LeaveRejectRespState(
+      {required this.leaveApproveRespModel, required super.isLoading});
+}

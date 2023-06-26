@@ -9,7 +9,7 @@ class LeaveRequest {
 
   @JsonKey(name: 'name')
   String? name;
-  
+
   @JsonKey(name: 'fromdate')
   String? fromdate;
 
