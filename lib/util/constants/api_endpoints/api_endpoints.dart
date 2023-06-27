@@ -6,5 +6,5 @@ class ApiEndpoints {
   static String leaveRequestsPoint = '/leave/request';
   static String approveLeavePoint = '/leave/approve';
   static String rejectLeavePoint = '/leave/decline';
-  static String correctionEndPoint = '/application/correction/';
+  static String correctionPoint = '/application/correction';
 }

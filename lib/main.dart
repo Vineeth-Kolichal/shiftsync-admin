@@ -49,8 +49,8 @@ class ShiftSyncAdminApp extends StatelessWidget {
         BlocProvider<ProfileRegFormBloc>(
           create: (ctx) => ProfileRegFormBloc(),
         ),
-        BlocProvider<ApproveProfileApplicationBloc>(
-          create: (ctx) => ApproveProfileApplicationBloc(),
+        BlocProvider<ApproveCorrectProfileBloc>(
+          create: (ctx) => ApproveCorrectProfileBloc(),
         ),
         BlocProvider<LeaveRequestBloc>(
           create: (ctx) => LeaveRequestBloc(),

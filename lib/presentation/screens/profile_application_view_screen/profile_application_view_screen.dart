@@ -4,8 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:shiftsync_admin/bussiness_logic/bloc/approve_profile_application/approve_profile_application_bloc.dart';
+import 'package:shiftsync_admin/bussiness_logic/bloc/profile_reg_form/profile_reg_form_bloc.dart';
 import 'package:shiftsync_admin/data/models/approve_application_model/approve_application.dart';
+import 'package:shiftsync_admin/presentation/screens/profile_application_view_screen/widgets/approve_resp_dialoge.dart';
 import 'package:shiftsync_admin/presentation/screens/profile_application_view_screen/widgets/send_correction_dialoge.dart';
+import 'package:shiftsync_admin/util/alert_snackbar_fuctions/response_message_snackbar.dart';
 import 'package:shiftsync_admin/util/constants/constants_items/constant_items.dart';
 import 'package:shiftsync_admin/data/models/profile_registration_application_model/form.dart';
 import 'package:shiftsync_admin/presentation/screens/profile_application_view_screen/widgets/bank_details_section.dart';
@@ -23,32 +26,35 @@ class ProfileApplicationViewScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<ApproveProfileApplicationBloc,
+    return BlocListener<ApproveCorrectProfileBloc,
         ApproveProfileApplicationState>(
       listener: (context, state) {
         if (state is ApproveResponseState) {
-          log('${state.applicationResponse.errors} --------------${state.applicationResponse.status}');
-          String allErrorMsg = '';
-          List<String> errors = [];
-          errors.addAll(state.applicationResponse.errors ?? ['']);
-          for (var i = 0; i < errors.length; i++) {
-            allErrorMsg = '$allErrorMsg \n ${i + 1}.${errors[i]}';
+          if (state.applicationResponse.status == 400) {
+            approveRespoDialoge(context: context, state: state);
+          } else if (state.applicationResponse.status == 200) {
+            ScaffoldMessenger.of(context).showSnackBar(responseMessageSnackbar(
+                message: state.applicationResponse.message ?? 'Approved',
+                color: Colors.green));
+          } else {
+            ScaffoldMessenger.of(context).showSnackBar(responseMessageSnackbar(
+                message: 'Somethig error', color: Colors.red));
           }
-          showDialog(
-              context: context,
-              builder: (ctx) {
-                return AlertDialog(
-                  title: const Text('Correction!'),
-                  content: Text(allErrorMsg),
-                  actions: [
-                    ElevatedButton(
-                        onPressed: () {
-                          Navigator.of(context).pop();
-                        },
-                        child: const Text('close')),
-                  ],
-                );
-              });
+        }
+        if (state is CorrectionApplicationRespState) {
+          if (state.correctionRespModel.status == 200) {
+            ScaffoldMessenger.of(context).showSnackBar(responseMessageSnackbar(
+                message: state.correctionRespModel.message ?? 'Correction send',
+                color: Colors.green));
+            Future.delayed(const Duration(milliseconds: 1100), () {
+              Navigator.of(context).pop();
+              context.read<ProfileRegFormBloc>().add(ProfileRegFormEvent());
+            });
+          } else {
+            ScaffoldMessenger.of(context).showSnackBar(responseMessageSnackbar(
+                message: state.correctionRespModel.message ?? ' Error',
+                color: Colors.red));
+          }
         }
       },
       child: Scaffold(
@@ -114,7 +120,8 @@ class ProfileApplicationViewScreen extends StatelessWidget {
                     showDialog(
                         context: context,
                         builder: (ctx) {
-                          return sendCorrection(ctx: ctx);
+                          return sendCorrection(
+                              ctx: ctx, id: forms.id, context: context);
                         });
                   },
                   label: 'Correction',
@@ -123,7 +130,7 @@ class ProfileApplicationViewScreen extends StatelessWidget {
                   borderRadius: 20,
                 ),
                 kWidthFive,
-                BlocBuilder<ApproveProfileApplicationBloc,
+                BlocBuilder<ApproveCorrectProfileBloc,
                     ApproveProfileApplicationState>(
                   builder: (context, state) {
                     return SubmitButton(
@@ -131,7 +138,7 @@ class ProfileApplicationViewScreen extends StatelessWidget {
                       onPressed: (state.isLoading)
                           ? null
                           : () {
-                              context.read<ApproveProfileApplicationBloc>().add(
+                              context.read<ApproveCorrectProfileBloc>().add(
                                   ApproveProfileApplicationEvent(
                                       applicationModel: ApproveApplicationModel(
                                           id: forms.id)));
