@@ -13,7 +13,7 @@ class ProfileApplicationsTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-        Size size = MediaQuery.of(context).size;
+    Size size = MediaQuery.of(context).size;
 
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       context.read<ProfileRegFormBloc>().add(ProfileRegFormEvent());
@@ -25,8 +25,15 @@ class ProfileApplicationsTab extends StatelessWidget {
           if (state is ProfileRegFormResponseState &&
               state.profileRegistrationApplicationModel.msg == null) {
             if (state.profileRegistrationApplicationModel.status == 204) {
-              return const Center(
-                child: Text('No new applications found'),
+              return Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  LottieBuilder.asset(
+                      width: size.width * 0.5,
+                      'assets/lottie_jsons/search_empty.json'),
+                  kHeightTen,
+                  const Text('No new applications found'),
+                ],
               );
             }
             int? length =
@@ -37,15 +44,15 @@ class ProfileApplicationsTab extends StatelessWidget {
                     state.profileRegistrationApplicationModel.forms;
                 if (forms == null) {
                   return Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  LottieBuilder.asset(
-                      width: size.width * 0.5,
-                      'assets/lottie_jsons/search_empty.json'),
-                  kHeightTen,
-                  const Text('No leave applications found'),
-                ],
-              );
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      LottieBuilder.asset(
+                          width: size.width * 0.5,
+                          'assets/lottie_jsons/search_empty.json'),
+                      kHeightTen,
+                      const Text('No leave applications found'),
+                    ],
+                  );
                 }
                 return ProfileApplicationListTile(
                   forms: forms,

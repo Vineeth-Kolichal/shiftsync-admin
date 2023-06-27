@@ -18,3 +18,9 @@ class ApproveResponseState extends ApproveProfileApplicationState {
   ApproveResponseState(
       {required this.applicationResponse, required super.isLoading});
 }
+
+class CorrectionApplicationRespState extends ApproveProfileApplicationState {
+  final CorrectionRespModel correctionRespModel;
+  CorrectionApplicationRespState(
+      {required this.correctionRespModel, required super.isLoading});
+}

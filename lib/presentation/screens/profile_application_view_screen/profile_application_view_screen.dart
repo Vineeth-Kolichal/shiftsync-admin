@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:shiftsync_admin/bussiness_logic/bloc/approve_profile_application/approve_profile_application_bloc.dart';
 import 'package:shiftsync_admin/data/models/approve_application_model/approve_application.dart';
+import 'package:shiftsync_admin/presentation/screens/profile_application_view_screen/widgets/send_correction_dialoge.dart';
 import 'package:shiftsync_admin/util/constants/constants_items/constant_items.dart';
 import 'package:shiftsync_admin/data/models/profile_registration_application_model/form.dart';
 import 'package:shiftsync_admin/presentation/screens/profile_application_view_screen/widgets/bank_details_section.dart';
@@ -109,7 +110,13 @@ class ProfileApplicationViewScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 SubmitButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    showDialog(
+                        context: context,
+                        builder: (ctx) {
+                          return sendCorrection(ctx: ctx);
+                        });
+                  },
                   label: 'Correction',
                   width: 0.3,
                   // buttonColor: Colors.red,

@@ -20,6 +20,7 @@ class LeaveApproveRespState extends LeaveRequestState {
   LeaveApproveRespState(
       {required this.leaveApproveRespModel, required super.isLoading});
 }
+
 class LeaveRejectRespState extends LeaveRequestState {
   final LeaveApproveRejectRespModel leaveApproveRespModel;
   LeaveRejectRespState(
