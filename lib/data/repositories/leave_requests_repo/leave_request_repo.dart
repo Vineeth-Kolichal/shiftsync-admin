@@ -10,6 +10,7 @@ class LeaveRequestRepo {
     }, (resp) {
       return LeaveRequestsModel.fromJson(resp.data);
     });
+
     return leaveRequestsModel;
   }
 }

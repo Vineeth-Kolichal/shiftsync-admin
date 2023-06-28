@@ -7,4 +7,6 @@ class ApiEndpoints {
   static String approveLeavePoint = '/leave/approve';
   static String rejectLeavePoint = '/leave/decline';
   static String correctionPoint = '/application/correction';
+  static String getAllEmployeesPoint = '/employees';
+  static String scheduleDuty = '/schedule/';
 }
