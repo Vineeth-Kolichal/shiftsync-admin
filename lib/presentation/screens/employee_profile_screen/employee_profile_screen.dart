@@ -13,10 +13,7 @@ import 'package:shiftsync_admin/presentation/widgets/submit_button.dart';
 import 'package:shiftsync_admin/util/alert_snackbar_fuctions/response_message_snackbar.dart';
 import 'package:shiftsync_admin/util/colors/background_colors.dart';
 import 'package:shiftsync_admin/util/constants/constants_items/constant_items.dart';
-
 import 'widget/employee_details_section.dart';
-
-List<String> items = ['Morning Shift', 'Night Shift'];
 
 class EmployeeProfileScreen extends StatelessWidget {
   EmployeeProfileScreen({super.key, required this.employee});
@@ -122,6 +119,7 @@ class EmployeeProfileScreen extends StatelessWidget {
                       Navigator.of(context).pop();
                     });
                   } else {
+                    log('${state.scheduleRespModel.message}');
                     ScaffoldMessenger.of(context).showSnackBar(
                         responseMessageSnackbar(
                             message: 'Something Error', color: Colors.red));
@@ -136,15 +134,22 @@ class EmployeeProfileScreen extends StatelessWidget {
                   );
                 }
                 return SubmitButton(
-                    onPressed: () {
-                      DutyScheduleModel scheduleModel = DutyScheduleModel(
-                          empid: employee.id!,
-                          dutytype: (dutyShift == 'Morning Shift') ? 'M' : 'N');
-                      context
-                          .read<DutyScheduleBloc>()
-                          .add(ScheduleDutyEvent(scheduleModel: scheduleModel));
-                    },
-                    label: 'Schedule');
+                  onPressed: () {
+                    DutyScheduleModel scheduleModel = DutyScheduleModel(
+                        empid: employee.id!,
+                        dutytype: (dutyShift == 'Morning Shift')
+                            ? 'M'
+                            : (dutyShift == 'Evening Shift')
+                                ? 'E'
+                                : 'N');
+
+                    //log(scheduleModel.dutytype);
+                    context
+                        .read<DutyScheduleBloc>()
+                        .add(ScheduleDutyEvent(scheduleModel: scheduleModel));
+                  },
+                  label: 'Schedule',
+                );
               },
             )
           ],

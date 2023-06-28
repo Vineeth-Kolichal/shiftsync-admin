@@ -18,3 +18,5 @@ const kWidthFive = SizedBox(
 const kHeightFive = SizedBox(
   height: 5,
 );
+
+const List<String> items = ['Morning Shift', 'Evening Shift', 'Night Shift'];
