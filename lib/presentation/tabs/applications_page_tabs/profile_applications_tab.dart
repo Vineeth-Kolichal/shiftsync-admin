@@ -24,7 +24,7 @@ class ProfileApplicationsTab extends StatelessWidget {
         builder: (context, state) {
           if (state is ProfileRegFormResponseState &&
               state.profileRegistrationApplicationModel.msg == null) {
-            if (state.profileRegistrationApplicationModel.status == 204) {
+            if (state.profileRegistrationApplicationModel.status == 404) {
               return Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [

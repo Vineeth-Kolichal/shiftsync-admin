@@ -21,6 +21,7 @@ class ScheduleDutyApiProvider {
       }
     } on DioException catch (e) {
       log(e.toString());
+      log('${e.response?.data}');
       if (e.response?.statusCode == 500 || e.response?.statusCode == 400) {
         return Right(e.response!);
       } else {
