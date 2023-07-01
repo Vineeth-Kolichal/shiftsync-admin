@@ -7,6 +7,7 @@ import 'package:path_provider/path_provider.dart';
 import 'package:shiftsync_admin/bussiness_logic/bloc/admin_sign_in/admin_sign_in_bloc.dart';
 import 'package:shiftsync_admin/bussiness_logic/bloc/all_employees/all_employees_bloc.dart';
 import 'package:shiftsync_admin/bussiness_logic/bloc/approve_profile_application/approve_profile_application_bloc.dart';
+import 'package:shiftsync_admin/bussiness_logic/bloc/dashboard/dashboard_bloc.dart';
 import 'package:shiftsync_admin/bussiness_logic/bloc/duty_schedule/duty_schedule_bloc.dart';
 import 'package:shiftsync_admin/bussiness_logic/bloc/leave_requests/leave_request_bloc.dart';
 import 'package:shiftsync_admin/bussiness_logic/bloc/profile_reg_form/profile_reg_form_bloc.dart';
@@ -62,6 +63,9 @@ class ShiftSyncAdminApp extends StatelessWidget {
         ),
         BlocProvider<DutyScheduleBloc>(
           create: (ctx) => DutyScheduleBloc(),
+        ),
+        BlocProvider(
+          create: (ctx) => getIt<DashboardBloc>(),
         ),
       ],
       child: MaterialApp(

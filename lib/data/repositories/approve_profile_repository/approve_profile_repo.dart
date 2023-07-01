@@ -1,9 +1,10 @@
 import 'package:shiftsync_admin/data/data_provider/approve_profile_form/approve_profile_form.dart';
 import 'package:shiftsync_admin/data/models/approve_application_model/approve_application.dart';
 import 'package:shiftsync_admin/data/models/approve_profile_application_response/approve_profile_application_response.dart';
+import 'package:shiftsync_admin/util/dependancy_injection/dependancy_injection.dart';
 
 class ApproveProfileRepo {
-  ApproveProfileFormApi approveProfileFormApi = ApproveProfileFormApi();
+  ApproveProfileFormApi approveProfileFormApi = getIt<ApproveProfileFormApi>();
   Future<ApproveProfileApplicationResponse> approveUserProfileApplication(
       {required ApproveApplicationModel approve}) async {
     final response =

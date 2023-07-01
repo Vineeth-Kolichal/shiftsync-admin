@@ -8,18 +8,18 @@ import 'package:shiftsync_admin/util/colors/common_colors.dart';
 import 'package:shiftsync_admin/util/constants/constants_items/constant_items.dart';
 
 class EmployeeTile extends StatelessWidget {
-  const EmployeeTile({super.key, required this.employee});
+  const EmployeeTile({super.key, required this.employee, required this.unScheduledEmpList});
   final Employee employee;
+  final List<int> unScheduledEmpList;
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
         Navigator.of(context).push(MaterialPageRoute(
-            builder: (ctx) => EmployeeProfileScreen(
+            builder: (ctx) => EmployeeProfileScreen(unscheduledEmps: unScheduledEmpList,
                   employee: employee,
                 )));
-        print('object');
       },
       child: Container(
         decoration: BoxDecoration(

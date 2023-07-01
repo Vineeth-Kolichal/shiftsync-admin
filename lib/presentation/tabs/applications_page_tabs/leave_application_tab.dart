@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lottie/lottie.dart';
@@ -47,7 +45,6 @@ class LeaveApplicationTab extends StatelessWidget {
             if (state is LeaveRequestResponseState &&
                 state.leaveRequestsModel.leaveRequests != null &&
                 state.leaveRequestsModel.leaveRequests!.isNotEmpty) {
-              log('${state.leaveRequestsModel.leaveRequests?[0].fromdate}');
               return ListView.separated(
                   itemBuilder: (ctx, index) {
                     LeaveRequest leaveRequest =

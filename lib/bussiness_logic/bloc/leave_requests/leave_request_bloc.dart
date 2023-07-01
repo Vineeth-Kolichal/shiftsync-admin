@@ -1,5 +1,4 @@
-import 'package:bloc/bloc.dart';
-import 'package:shiftsync_admin/data/data_provider/reject_leave_api_provider/reject_leave_api_provider.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shiftsync_admin/data/models/approve_application_model/approve_application.dart';
 import 'package:shiftsync_admin/data/models/leave_approve_reject_resp_model/leave_approve_reject_resp_model.dart';
 import 'package:shiftsync_admin/data/models/leave_requests_model/leave_requests_model.dart';
@@ -31,13 +30,12 @@ class LeaveRequestBloc extends Bloc<LeaveRequestEvent, LeaveRequestState> {
         LeaveApproveRespState(
             leaveApproveRespModel: approveRespModel, isLoading: false),
       );
-      on<RejectLeaveEvent>((event, emit) async {
-        LeaveApproveRejectRespModel approveRespModel =
-            await rejectLeaveRepository.rejectLeave(
-                applicationModel: event.applicationModel);
-        emit(LeaveApproveRespState(
-            leaveApproveRespModel: approveRespModel, isLoading: false));
-      });
+    });
+    on<DeclineLeaveEvent>((event, emit) async {
+      LeaveApproveRejectRespModel approveRespModel = await rejectLeaveRepository
+          .rejectLeave(applicationModel: event.applicationModel);
+      emit(LeaveApproveRespState(
+          leaveApproveRespModel: approveRespModel, isLoading: false));
     });
   }
 }

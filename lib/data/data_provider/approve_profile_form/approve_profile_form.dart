@@ -2,17 +2,20 @@ import 'dart:developer';
 
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
-import 'package:get_it/get_it.dart';
+import 'package:dio_cookie_manager/dio_cookie_manager.dart';
+import 'package:injectable/injectable.dart';
 import 'package:shiftsync_admin/util/constants/api_endpoints/api_endpoints.dart';
 import 'package:shiftsync_admin/data/models/approve_application_model/approve_application.dart';
-import 'package:shiftsync_admin/util/dio_object/dio_object.dart';
 
+@injectable
 class ApproveProfileFormApi {
-  // Dio dio = Dio(BaseOptions(baseUrl: ApiEndpoints.baseUrl));
+  final Dio dio;
+  final CookieManager cookieManager;
+
+  ApproveProfileFormApi(this.dio, this.cookieManager);
   Future<Either<String, Response>> approveProfile(
       {required ApproveApplicationModel approveApplication}) async {
-    // dio.interceptors.add(CookieManager(cookieJar));
-    Dio dio = GetIt.instance<DioObject>().returnDioObject();
+    dio.interceptors.add(cookieManager);
     try {
       final response = await dio.post(ApiEndpoints.approveApplicationPoint,
           data: {"id": approveApplication.id});

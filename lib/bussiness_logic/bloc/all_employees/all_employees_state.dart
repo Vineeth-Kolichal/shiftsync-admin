@@ -15,6 +15,10 @@ class AllEmployeesLoading extends AllEmployeesState {
 
 class AllEmployeesDisplayState extends AllEmployeesState {
   final AllEmployeesModel employeesModel;
-  AllEmployeesDisplayState(
-      {required this.employeesModel, required super.isLoading});
+  final List<int> unScheduledEmpIds;
+  AllEmployeesDisplayState({
+    required this.employeesModel,
+    required super.isLoading,
+    required this.unScheduledEmpIds,
+  });
 }

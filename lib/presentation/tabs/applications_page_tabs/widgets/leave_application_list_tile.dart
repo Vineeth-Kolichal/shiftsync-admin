@@ -1,5 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shiftsync_admin/bussiness_logic/bloc/leave_requests/leave_request_bloc.dart';
@@ -91,7 +93,7 @@ class LeaveApplicationListTile extends StatelessWidget {
                                       ctx: ctx,
                                       confirmOnPressed: () {
                                         context.read<LeaveRequestBloc>().add(
-                                              RejectLeaveEvent(
+                                              DeclineLeaveEvent(
                                                 applicationModel:
                                                     ApproveApplicationModel(
                                                   id: leaveRequest.id!,

@@ -1,9 +1,10 @@
 import 'package:shiftsync_admin/data/data_provider/schedule_duty_api_provider/schedule_duty_api_provider.dart';
 import 'package:shiftsync_admin/data/models/dut_schedule_resp_model/dut_schedule_resp_model.dart';
 import 'package:shiftsync_admin/data/models/duty_schdule_model/duty_schdule_model.dart';
+import 'package:shiftsync_admin/util/dependancy_injection/dependancy_injection.dart';
 
 class ScheduleDutyRepo {
-  ScheduleDutyApiProvider apiProvider = ScheduleDutyApiProvider();
+  ScheduleDutyApiProvider apiProvider = getIt<ScheduleDutyApiProvider>();
   Future<DutScheduleRespModel> scheduleDuty(
       {required DutyScheduleModel scheduleModel}) async {
     final response = await apiProvider.scheduleDuty(scheduleModel);

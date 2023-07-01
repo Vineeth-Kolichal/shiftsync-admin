@@ -1,6 +1,8 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:shiftsync_admin/bussiness_logic/bloc/dashboard/dashboard_bloc.dart';
 import 'package:shiftsync_admin/presentation/screens/home_screen/widgets/logout_dialoge.dart';
 import 'package:shiftsync_admin/presentation/widgets/custom_appbar/custom_app_bar.dart';
 import 'package:shiftsync_admin/util/colors/background_colors.dart';
@@ -12,6 +14,9 @@ class DashboardPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      context.read<DashboardBloc>().add(const Started());
+    });
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: PreferredSize(
@@ -78,14 +83,20 @@ class DashboardPage extends StatelessWidget {
           const TotalEmployesCountSection(),
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const PendingApplicationCountBox(
-                    count: 10, type: 'Profile registrations'),
-                kWidthTen,
-                PendingApplicationCountBox(type: 'Leave Application', count: 7)
-              ],
+            child: BlocBuilder<DashboardBloc, DashboardState>(
+              builder: (context, state) {
+                return Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    PendingApplicationCountBox(
+                        count: state.totalProAppli,
+                        type: 'Profile registrations'),
+                    kWidthTen,
+                    PendingApplicationCountBox(
+                        type: 'Leave Application', count: state.totalLeaveAppli)
+                  ],
+                );
+              },
             ),
           )
         ],
@@ -184,23 +195,27 @@ class TotalEmployesCountSection extends StatelessWidget {
                   SizedBox(
                     height: size.width * 0.4,
                     width: size.width * 0.85,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          'Total Number of Employees',
-                          style: TextStyle(
-                              fontSize: 18, fontWeight: FontWeight.w600),
-                        ),
-                        kHeightTen,
-                        Text(
-                          '10',
-                          style: TextStyle(
-                              color: customPrimaryColor,
-                              fontSize: 50,
-                              fontWeight: FontWeight.w600),
-                        )
-                      ],
+                    child: BlocBuilder<DashboardBloc, DashboardState>(
+                      builder: (context, state) {
+                        return Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            const Text(
+                              'Total Number of Employees',
+                              style: TextStyle(
+                                  fontSize: 18, fontWeight: FontWeight.w600),
+                            ),
+                            kHeightTen,
+                            Text(
+                              '${state.totalNoEmps}',
+                              style: const TextStyle(
+                                  color: customPrimaryColor,
+                                  fontSize: 50,
+                                  fontWeight: FontWeight.w600),
+                            )
+                          ],
+                        );
+                      },
                     ),
                   ),
                 ],

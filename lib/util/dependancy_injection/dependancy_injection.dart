@@ -1,8 +1,10 @@
 import 'package:get_it/get_it.dart';
-import 'package:shiftsync_admin/util/dio_object/dio_object.dart';
+import 'package:injectable/injectable.dart';
+import 'package:shiftsync_admin/util/dependancy_injection/dependancy_injection.config.dart';
 
-GetIt locator = GetIt.instance;
+GetIt getIt = GetIt.instance;
 
+@InjectableInit()
 Future<void> configureInjection() async {
-  locator.registerLazySingleton<DioObject>(() => DioObject());
+  getIt.init(environment: Environment.prod);
 }

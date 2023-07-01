@@ -16,8 +16,10 @@ import 'package:shiftsync_admin/util/constants/constants_items/constant_items.da
 import 'widget/employee_details_section.dart';
 
 class EmployeeProfileScreen extends StatelessWidget {
-  EmployeeProfileScreen({super.key, required this.employee});
+  EmployeeProfileScreen(
+      {super.key, required this.employee, required this.unscheduledEmps});
   final Employee employee;
+  final List<int> unscheduledEmps;
   String dutyShift = '';
   @override
   Widget build(BuildContext context) {
@@ -46,112 +48,121 @@ class EmployeeProfileScreen extends StatelessWidget {
         child: Column(
           children: [
             EmployeeDetailsSectionWidget(employee: employee, size: size),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                SizedBox(
-                  width: size.width * 0.3,
-                  child: const Divider(),
-                ),
-                const BoldTitleText(title: 'Schedule Duty'),
-                SizedBox(
-                  width: size.width * 0.3,
-                  child: const Divider(),
-                ),
-              ],
-            ),
-            kheightTwenty,
-            Padding(
-              padding: const EdgeInsets.all(10.0),
-              child: DropdownButtonFormField(
-                padding: const EdgeInsets.all(10),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return "Plase select duty shift type";
-                  } else {
-                    return null;
-                  }
-                },
-                decoration: InputDecoration(
-                  contentPadding: const EdgeInsets.all(10),
-                  enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
-                    borderSide: BorderSide(
-                      width: 1,
-                      color: customPrimaryColor[400]!,
+            Visibility(
+              visible: unscheduledEmps.contains(employee.id),
+              child: Column(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      SizedBox(
+                        width: size.width * 0.3,
+                        child: const Divider(),
+                      ),
+                      const BoldTitleText(title: 'Schedule Duty'),
+                      SizedBox(
+                        width: size.width * 0.3,
+                        child: const Divider(),
+                      ),
+                    ],
+                  ),
+                  kheightTwenty,
+                  Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: DropdownButtonFormField(
+                      padding: const EdgeInsets.all(10),
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return "Plase select duty shift type";
+                        } else {
+                          return null;
+                        }
+                      },
+                      decoration: InputDecoration(
+                        contentPadding: const EdgeInsets.all(10),
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10),
+                          borderSide: BorderSide(
+                            width: 1,
+                            color: customPrimaryColor[400]!,
+                          ),
+                        ),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10),
+                          borderSide: BorderSide(
+                            width: 1,
+                            color: customPrimaryColor[400]!,
+                          ),
+                        ),
+                      ),
+                      hint: const Text('Select duty shift'),
+                      icon: const Icon(Iconsax.arrow_down_1),
+                      borderRadius: BorderRadius.circular(10),
+                      items:
+                          items.map<DropdownMenuItem<String>>((String value) {
+                        return DropdownMenuItem<String>(
+                          value: value,
+                          child: Text(value),
+                        );
+                      }).toList(),
+                      onChanged: (value) {
+                        if (value != null) {
+                          dutyShift = value;
+                        }
+                      },
                     ),
                   ),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
-                    borderSide: BorderSide(
-                      width: 1,
-                      color: customPrimaryColor[400]!,
-                    ),
-                  ),
-                ),
-                hint: const Text('Select duty shift'),
-                icon: const Icon(Iconsax.arrow_down_1),
-                borderRadius: BorderRadius.circular(10),
-                items: items.map<DropdownMenuItem<String>>((String value) {
-                  return DropdownMenuItem<String>(
-                    value: value,
-                    child: Text(value),
-                  );
-                }).toList(),
-                onChanged: (value) {
-                  if (value != null) {
-                    dutyShift = value;
-                  }
-                },
+                  kheightTwenty,
+                  BlocConsumer<DutyScheduleBloc, DutyScheduleState>(
+                    listener: (context, state) {
+                      if (state is DutyScheduleRespState) {
+                        if (state.scheduleRespModel.status == 200) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                              responseMessageSnackbar(
+                                  message: state.scheduleRespModel.message ??
+                                      'Scheduled successfully',
+                                  color: Colors.green));
+                          Future.delayed(const Duration(milliseconds: 1100),
+                              () {
+                            Navigator.of(context).pop();
+                          });
+                        } else {
+                          log('${state.scheduleRespModel.message}');
+                          ScaffoldMessenger.of(context).showSnackBar(
+                              responseMessageSnackbar(
+                                  message: 'Something Error',
+                                  color: Colors.red));
+                        }
+                      }
+                    },
+                    builder: (context, state) {
+                      if (state is DutyScheduleLoading) {
+                        return LoadingAnimationWidget.inkDrop(
+                          color: customPrimaryColor,
+                          size: 25,
+                        );
+                      }
+                      return SubmitButton(
+                        onPressed: () {
+                          DutyScheduleModel scheduleModel = DutyScheduleModel(
+                              empid: employee.id!,
+                              dutytype: (dutyShift == 'Morning Shift')
+                                  ? 'M'
+                                  : (dutyShift == 'Evening Shift')
+                                      ? 'E'
+                                      : 'N');
+
+                          //log(scheduleModel.dutytype);
+                          context.read<DutyScheduleBloc>().add(
+                              ScheduleDutyEvent(scheduleModel: scheduleModel));
+                        },
+                        label: 'Schedule',
+                      );
+                    },
+                  )
+                ],
               ),
             ),
-            kheightTwenty,
-            BlocConsumer<DutyScheduleBloc, DutyScheduleState>(
-              listener: (context, state) {
-                if (state is DutyScheduleRespState) {
-                  if (state.scheduleRespModel.status == 200) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                        responseMessageSnackbar(
-                            message: state.scheduleRespModel.message ??
-                                'Scheduled successfully',
-                            color: Colors.green));
-                    Future.delayed(const Duration(milliseconds: 1100), () {
-                      Navigator.of(context).pop();
-                    });
-                  } else {
-                    log('${state.scheduleRespModel.message}');
-                    ScaffoldMessenger.of(context).showSnackBar(
-                        responseMessageSnackbar(
-                            message: 'Something Error', color: Colors.red));
-                  }
-                }
-              },
-              builder: (context, state) {
-                if (state is DutyScheduleLoading) {
-                  return LoadingAnimationWidget.inkDrop(
-                    color: customPrimaryColor,
-                    size: 25,
-                  );
-                }
-                return SubmitButton(
-                  onPressed: () {
-                    DutyScheduleModel scheduleModel = DutyScheduleModel(
-                        empid: employee.id!,
-                        dutytype: (dutyShift == 'Morning Shift')
-                            ? 'M'
-                            : (dutyShift == 'Evening Shift')
-                                ? 'E'
-                                : 'N');
-
-                    //log(scheduleModel.dutytype);
-                    context
-                        .read<DutyScheduleBloc>()
-                        .add(ScheduleDutyEvent(scheduleModel: scheduleModel));
-                  },
-                  label: 'Schedule',
-                );
-              },
-            )
           ],
         ),
       ),

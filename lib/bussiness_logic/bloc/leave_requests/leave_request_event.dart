@@ -7,7 +7,7 @@ class ApproveLeaveEvent extends LeaveRequestEvent {
   ApproveLeaveEvent({required this.applicationModel});
 }
 
-class RejectLeaveEvent extends LeaveRequestEvent {
+class DeclineLeaveEvent extends LeaveRequestEvent {
   final ApproveApplicationModel applicationModel;
-  RejectLeaveEvent({required this.applicationModel});
+  DeclineLeaveEvent({required this.applicationModel});
 }

@@ -66,7 +66,7 @@ class EmployeesPage extends StatelessWidget {
               } else {
                 return ListView.separated(
                   itemBuilder: (ctx, index) {
-                    return EmployeeTile(
+                    return EmployeeTile(unScheduledEmpList: state.unScheduledEmpIds,
                       employee: state.employeesModel.employees![index],
                     );
                   },

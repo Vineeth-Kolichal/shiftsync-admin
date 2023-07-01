@@ -7,8 +7,10 @@ class DutScheduleRespModel {
   int? status;
   String? message;
 
-
-  DutScheduleRespModel({this.status, this.message,});
+  DutScheduleRespModel({
+    this.status,
+    this.message,
+  });
 
   factory DutScheduleRespModel.fromJson(Map<String, dynamic> json) {
     return _$DutScheduleRespModelFromJson(json);
