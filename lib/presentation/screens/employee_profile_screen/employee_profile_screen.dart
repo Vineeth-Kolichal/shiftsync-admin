@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
+import 'package:shiftsync_admin/bussiness_logic/bloc/all_employees/all_employees_bloc.dart';
 import 'package:shiftsync_admin/bussiness_logic/bloc/duty_schedule/duty_schedule_bloc.dart';
 import 'package:shiftsync_admin/data/models/all_employees_model/employee.dart';
 import 'package:shiftsync_admin/data/models/duty_schdule_model/duty_schdule_model.dart';
@@ -15,6 +16,7 @@ import 'package:shiftsync_admin/util/colors/background_colors.dart';
 import 'package:shiftsync_admin/util/constants/constants_items/constant_items.dart';
 import 'widget/employee_details_section.dart';
 
+// ignore: must_be_immutable
 class EmployeeProfileScreen extends StatelessWidget {
   EmployeeProfileScreen(
       {super.key, required this.employee, required this.unscheduledEmps});
@@ -23,6 +25,9 @@ class EmployeeProfileScreen extends StatelessWidget {
   String dutyShift = '';
   @override
   Widget build(BuildContext context) {
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      context.read<AllEmployeesBloc>().add(UnsheduledEmployeeEvent());
+    });
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: PreferredSize(
@@ -31,6 +36,8 @@ class EmployeeProfileScreen extends StatelessWidget {
           child: CustomAppBar(
             leading: InkWell(
               onTap: () {
+                context.read<AllEmployeesBloc>().add(AllEmployeesEvent());
+
                 Navigator.of(context).pop();
               },
               child: const SizedBox(
@@ -48,24 +55,40 @@ class EmployeeProfileScreen extends StatelessWidget {
         child: Column(
           children: [
             EmployeeDetailsSectionWidget(employee: employee, size: size),
-            Visibility(
-              visible: unscheduledEmps.contains(employee.id),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                SizedBox(
+                  width: size.width * 0.3,
+                  child: const Divider(),
+                ),
+                const BoldTitleText(title: 'Schedule Duty'),
+                SizedBox(
+                  width: size.width * 0.3,
+                  child: const Divider(),
+                ),
+              ],
+            ),
+            Expanded(
+                child:
+                    // BlocBuilder<AllEmployeesBloc, AllEmployeesState>(
+                    //   builder: (context, state) {
+                    //     log(state.runtimeType.toString());
+                    //     if (state is UnscheduledEmployeeState) {
+                    //       if (state.loading) {
+                    //         return const Center(
+                    //           child: CircularProgressIndicator(),
+                    //         );
+                    //       } else if (!state.unScheduledEmpIds.contains(employee.id)) {
+                    //         return const Center(
+                    //           child: Text('Duty Already Assigned'),
+                    //         );
+                    //       } else {
+                    //         return
+                    Visibility(
+              visible: (unscheduledEmps.contains(employee.id)),
               child: Column(
                 children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      SizedBox(
-                        width: size.width * 0.3,
-                        child: const Divider(),
-                      ),
-                      const BoldTitleText(title: 'Schedule Duty'),
-                      SizedBox(
-                        width: size.width * 0.3,
-                        child: const Divider(),
-                      ),
-                    ],
-                  ),
                   kheightTwenty,
                   Padding(
                     padding: const EdgeInsets.all(10.0),
@@ -162,7 +185,15 @@ class EmployeeProfileScreen extends StatelessWidget {
                   )
                 ],
               ),
-            ),
+            ))
+            //;
+            //         }
+            //       } else {
+            //         return const SizedBox();
+            //       }
+            //     },
+            //   ),
+            // ),
           ],
         ),
       ),

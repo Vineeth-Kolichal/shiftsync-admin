@@ -22,13 +22,24 @@ class AllEmployeesBloc extends Bloc<AllEmployeesEvent, AllEmployeesState> {
       for (int i = 0; i < employeeList.employees!.length; i++) {
         unScheduledEmp.add(employeeList.employees![i].id!);
       }
-      log('$unScheduledEmp');
+      // log('$unScheduledEmp');
       emit(
         AllEmployeesDisplayState(
             employeesModel: employeesModel,
             isLoading: false,
             unScheduledEmpIds: unScheduledEmp),
       );
+    });
+    on<UnsheduledEmployeeEvent>((event, emit) async {
+      emit(UnscheduledEmployeeState(
+          unScheduledEmpIds: [], isLoading: false, loading: true));
+      UnScheduledEmployeeList employeeList =
+          await employeesRepo.getUnscheduledEmployeeList();
+      for (int i = 0; i < employeeList.employees!.length; i++) {
+        //unScheduledEmp.add(employeeList.employees![i].id!);
+      }
+      emit(UnscheduledEmployeeState(
+          unScheduledEmpIds: unScheduledEmp, isLoading: false, loading: false));
     });
   }
 }

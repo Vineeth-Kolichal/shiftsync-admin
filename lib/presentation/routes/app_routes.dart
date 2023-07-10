@@ -16,6 +16,7 @@ class AppRoutes {
         return MaterialPageRoute(builder: (ctx) => SignInScreen());
       case '/home_screen':
         return MaterialPageRoute(builder: (ctx) => HomeScreen());
+
       default:
         return _errorRoute();
     }

@@ -20,7 +20,7 @@ class ApproveResponseState extends ApproveProfileApplicationState {
 }
 
 class CorrectionApplicationRespState extends ApproveProfileApplicationState {
-  final CorrectionRespModel correctionRespModel;
+  final CommonRespModel correctionRespModel;
   CorrectionApplicationRespState(
       {required this.correctionRespModel, required super.isLoading});
 }

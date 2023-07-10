@@ -4,6 +4,7 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:shiftsync_admin/bussiness_logic/bloc/add_edit_salary/add_edit_salary_bloc.dart';
 import 'package:shiftsync_admin/bussiness_logic/bloc/admin_sign_in/admin_sign_in_bloc.dart';
 import 'package:shiftsync_admin/bussiness_logic/bloc/all_employees/all_employees_bloc.dart';
 import 'package:shiftsync_admin/bussiness_logic/bloc/approve_profile_application/approve_profile_application_bloc.dart';
@@ -11,6 +12,8 @@ import 'package:shiftsync_admin/bussiness_logic/bloc/dashboard/dashboard_bloc.da
 import 'package:shiftsync_admin/bussiness_logic/bloc/duty_schedule/duty_schedule_bloc.dart';
 import 'package:shiftsync_admin/bussiness_logic/bloc/leave_requests/leave_request_bloc.dart';
 import 'package:shiftsync_admin/bussiness_logic/bloc/profile_reg_form/profile_reg_form_bloc.dart';
+import 'package:shiftsync_admin/bussiness_logic/bloc/salary_add_edit_screen/add_edit_salary_screen_bloc.dart';
+import 'package:shiftsync_admin/bussiness_logic/bloc/transaction_tab/transaction_tab_bloc.dart';
 import 'package:shiftsync_admin/bussiness_logic/cubit/custom_bottom_navigation/custom_bottm_navigation_cubit.dart';
 import 'package:shiftsync_admin/bussiness_logic/cubit/internet_connection_check/internet_connection_check_cubit.dart';
 import 'package:shiftsync_admin/util/colors/background_colors.dart';
@@ -66,6 +69,15 @@ class ShiftSyncAdminApp extends StatelessWidget {
         ),
         BlocProvider(
           create: (ctx) => getIt<DashboardBloc>(),
+        ),
+        BlocProvider(
+          create: (ctx) => getIt<TransactionTabBloc>(),
+        ),
+        BlocProvider(
+          create: (ctx) => getIt<AddEditSalaryBloc>(),
+        ),
+        BlocProvider(
+          create: (ctx) => getIt<AddEditSalaryScreenBloc>(),
         ),
       ],
       child: MaterialApp(

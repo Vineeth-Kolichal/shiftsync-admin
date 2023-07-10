@@ -22,3 +22,12 @@ class AllEmployeesDisplayState extends AllEmployeesState {
     required this.unScheduledEmpIds,
   });
 }
+
+class UnscheduledEmployeeState extends AllEmployeesState {
+  final bool loading;
+  final List<int> unScheduledEmpIds;
+  UnscheduledEmployeeState(
+      {required this.unScheduledEmpIds,
+      required super.isLoading,
+      required this.loading});
+}

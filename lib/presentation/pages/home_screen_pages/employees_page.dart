@@ -53,20 +53,25 @@ class EmployeesPage extends StatelessWidget {
             if (state is AllEmployeesDisplayState &&
                 state.employeesModel.employees != null) {
               if (state.employeesModel.employees!.isEmpty) {
-                return Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    LottieBuilder.asset(
-                        width: size.width * 0.5,
-                        'assets/lottie_jsons/search_empty.json'),
-                    kHeightTen,
-                    const Text('No leave applications found'),
-                  ],
+                return SizedBox(
+                  height: size.height,
+                  width: size.width,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      LottieBuilder.asset(
+                          width: size.width * 0.5,
+                          'assets/lottie_jsons/search_empty.json'),
+                      kHeightTen,
+                      const Text('No leave applications found'),
+                    ],
+                  ),
                 );
               } else {
                 return ListView.separated(
                   itemBuilder: (ctx, index) {
-                    return EmployeeTile(unScheduledEmpList: state.unScheduledEmpIds,
+                    return EmployeeTile(
+                      unScheduledEmpList: state.unScheduledEmpIds,
                       employee: state.employeesModel.employees![index],
                     );
                   },

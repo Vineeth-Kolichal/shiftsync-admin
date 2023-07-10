@@ -18,23 +18,20 @@ class ApproveProfileFormApi {
     dio.interceptors.add(cookieManager);
     try {
       final response = await dio.post(ApiEndpoints.approveApplicationPoint,
-          data: {"id": approveApplication.id});
+          data: approveApplication.toJson());
       if (response.statusCode == 201 || response.statusCode == 200) {
         return Right(response);
       } else {
-        log('qwer1111111111111');
         return const Left('Something error');
       }
     } on DioException catch (e) {
-      log(e.response!.statusCode.toString());
+      log(e.toString());
       if (e.response?.statusCode == 400) {
         return Right(e.response!);
       } else {
-        log(e.response.toString());
         return const Left('Something Error');
       }
     } catch (e) {
-      log('kkkkkkkkkkkkkkkkkkkkkk');
       return const Left('Something Error');
     }
   }

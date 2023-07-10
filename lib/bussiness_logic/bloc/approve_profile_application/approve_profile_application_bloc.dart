@@ -1,8 +1,8 @@
 import 'package:bloc/bloc.dart';
 import 'package:shiftsync_admin/data/models/approve_application_model/approve_application.dart';
 import 'package:shiftsync_admin/data/models/approve_profile_application_response/approve_profile_application_response.dart';
+import 'package:shiftsync_admin/data/models/common_resp_model/common_resp_model.dart';
 import 'package:shiftsync_admin/data/models/correction_model/correction_model.dart';
-import 'package:shiftsync_admin/data/models/correction_resp_model/correction_resp_model.dart';
 import 'package:shiftsync_admin/data/repositories/approve_profile_repository/approve_profile_repo.dart';
 import 'package:shiftsync_admin/data/repositories/profile_correction_repository/profile_correction_repository.dart';
 
@@ -25,7 +25,7 @@ class ApproveCorrectProfileBloc
     });
 
     on<CorrectionApplicationEvent>((event, emit) async {
-      CorrectionRespModel model = await profileCorrectionRepository
+      CommonRespModel model = await profileCorrectionRepository
           .profileCorrection(correctionModel: event.correctionModel);
       emit(CorrectionApplicationRespState(
           correctionRespModel: model, isLoading: false));

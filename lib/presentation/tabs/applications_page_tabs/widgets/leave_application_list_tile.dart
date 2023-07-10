@@ -1,7 +1,3 @@
-// ignore_for_file: prefer_const_constructors
-
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shiftsync_admin/bussiness_logic/bloc/leave_requests/leave_request_bloc.dart';
@@ -37,7 +33,7 @@ class LeaveApplicationListTile extends StatelessWidget {
         Theme(
           data: Theme.of(context).copyWith(dividerColor: Colors.transparent),
           child: ExpansionTile(
-            title: Text(
+            title: const Text(
               'More details',
             ),
             children: [
@@ -50,7 +46,7 @@ class LeaveApplicationListTile extends StatelessWidget {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          TitileText(title: 'From Date:'),
+                          const TitileText(title: 'From Date:'),
                           Text(leaveRequest.fromdate ?? 'From date')
                         ],
                       ),
@@ -58,7 +54,7 @@ class LeaveApplicationListTile extends StatelessWidget {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          TitileText(title: 'To Date:'),
+                          const TitileText(title: 'To Date:'),
                           Text(leaveRequest.todate ?? 'To date')
                         ],
                       ),
@@ -67,7 +63,7 @@ class LeaveApplicationListTile extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          TitileText(title: 'Reason:'),
+                          const TitileText(title: 'Reason:'),
                           SizedBox(
                             width: size.width * 0.5,
                             child: Text(
