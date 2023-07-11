@@ -7,10 +7,10 @@ part 'transaction_model.g.dart';
 @JsonSerializable()
 class TransactionModel {
   @JsonKey(name: 'Transactions')
-  List<Transaction>? transactions;
+  List<Transaction> transactions;
   int? status;
 
-  TransactionModel({this.transactions, this.status});
+  TransactionModel({this.transactions = const [], this.status});
 
   factory TransactionModel.fromJson(Map<String, dynamic> json) {
     return _$TransactionModelFromJson(json);
